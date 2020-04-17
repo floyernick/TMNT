@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+.mypy_cache
+vendor/
+__pycache__/
+.DS_Store
+default.env

@@ -13,3 +13,15 @@ async def users_signup(self: Presenter, request: Any) -> Dict[str, Any]:
     request_body = await utils.parse_request_body(request)
     response_body = await self.controller.users_signup(request_body)
     return response_body
+
+
+async def users_signin(self: Presenter, request: Any) -> Dict[str, Any]:
+    request_body = await utils.parse_request_body(request)
+    response_body = await self.controller.users_signin(request_body)
+    return response_body
+
+
+async def users_get(self: Presenter, request: Any) -> Dict[str, Any]:
+    request_body = await utils.parse_request_body(request)
+    response_body = await self.controller.users_get(request_body)
+    return response_body

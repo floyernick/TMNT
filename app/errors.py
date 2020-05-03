@@ -34,5 +34,9 @@ class UsernameUsed(DomainException):
     description = "username used"
 
 
+class InvalidCredentials(DomainException):
+    description = "invalid credentials"
+
+
 class StorageException(Exception):
     description = ""

@@ -26,6 +26,25 @@ schemas = {
             "type": "string",
             "regex": "[^\s]{8,32}$"
         },
+    },
+    "users_signin": {
+        "username": {
+            "required": True,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+        "password": {
+            "required": True,
+            "type": "string",
+            "regex": "[^\s]{8,32}$"
+        },
+    },
+    "users_get": {
+        "token": {
+            "required": True,
+            "type": "string"
+        }
     }
 }
 

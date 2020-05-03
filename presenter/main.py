@@ -13,6 +13,8 @@ class Presenter:
         self.controller: controller.Controller = controller_
 
     users_signup = users.users_signup
+    users_signin = users.users_signin
+    users_get = users.users_get
 
 
 async def init(config: Dict[str, Any], controller_: controller.Controller):
@@ -22,6 +24,8 @@ async def init(config: Dict[str, Any], controller_: controller.Controller):
     app = web.Application(middlewares=[utils.handle])
 
     app.router.add_route("POST", "/users.signup", presenter.users_signup)
+    app.router.add_route("POST", "/users.signin", presenter.users_signin)
+    app.router.add_route("POST", "/users.get", presenter.users_get)
 
     runner = web.AppRunner(app, access_log=False)
     await runner.setup()

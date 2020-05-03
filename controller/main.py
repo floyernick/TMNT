@@ -8,6 +8,8 @@ class Controller:
         self.storage: storage.Storage = storage_
 
     users_signup = users.users_signup
+    users_signin = users.users_signin
+    users_get = users.users_get
 
 
 async def init(storage_: storage.Storage) -> Controller:

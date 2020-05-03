@@ -75,6 +75,24 @@ schemas = {
             "maxlength": 100
         },
     },
+    "channels_create": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "name": {
+            "required": True,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+        "photo": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+    },
 }
 
 

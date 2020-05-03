@@ -1,6 +1,6 @@
 import storage
 
-from . import users
+from . import users, channels
 
 
 class Controller:
@@ -11,6 +11,8 @@ class Controller:
     users_signin = users.users_signin
     users_get = users.users_get
     users_update = users.users_update
+
+    channels_create = channels.channels_create
 
 
 async def init(storage_: storage.Storage) -> Controller:

@@ -66,12 +66,10 @@ class Storage(interface.Storage):
 
     store_user = user.store_user
     update_user = user.update_user
-    delete_user = user.delete_user
     get_users = user.get_users
 
     store_channel = channel.store_channel
     update_channel = channel.update_channel
-    delete_channel = channel.delete_channel
     get_channels = channel.get_channels
 
 

@@ -15,12 +15,14 @@ class Reply:
                  creator_id: int = 0,
                  post_id: int = 0,
                  text: str = "",
-                 photo: str = ""):
+                 photo: str = "",
+                 deleted: bool = False):
         self.id: int = id_
         self.creator_id: int = creator_id
         self.post_id: int = post_id
         self.text: str = text
         self.photo: str = photo
+        self.deleted: bool = deleted
 
     def exists(self) -> bool:
         return self.id != 0

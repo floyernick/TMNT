@@ -14,6 +14,7 @@ class Controller:
 
     channels_create = channels.channels_create
     channels_update = channels.channels_update
+    channels_delete = channels.channels_delete
     channels_get = channels.channels_get
 
 

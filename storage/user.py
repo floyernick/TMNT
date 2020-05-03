@@ -203,16 +203,5 @@ async def update_user(self: Storage, user: models.User) -> None:
         raise errors.StorageException
 
 
-async def delete_user(self: Storage, user: models.User) -> None:
-
-    query = "DELETE FROM users WHERE id = $1"
-
-    try:
-        await self.performer().execute(query, user.id)
-    except Exception as e:
-        await logger.warning(e)
-        raise errors.StorageException
-
-
 async def get_users(self: Storage) -> UsersListQuery:
     return UsersListQuery(self)

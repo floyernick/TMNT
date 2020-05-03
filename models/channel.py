@@ -15,11 +15,13 @@ class Channel:
                  id_: int = 0,
                  creator_id: int = 0,
                  name: str = "",
-                 photo: str = ""):
+                 photo: str = "",
+                 deleted: bool = False):
         self.id: int = id_
         self.creator_id: int = creator_id
         self.name: str = name
         self.photo: str = photo
+        self.deleted: bool = deleted
         self.creator: Optional[User] = None
 
     def exists(self) -> bool:

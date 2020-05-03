@@ -16,13 +16,15 @@ class Post:
                  channel_id: int = 0,
                  name: str = "",
                  text: str = "",
-                 photo: str = ""):
+                 photo: str = "",
+                 deleted: bool = False):
         self.id: int = id_
         self.creator_id: int = creator_id
         self.channel_id: int = channel_id
         self.name: str = name
         self.text: str = text
         self.photo: str = photo
+        self.deleted: bool = deleted
 
     def exists(self) -> bool:
         return self.id != 0

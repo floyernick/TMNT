@@ -27,10 +27,6 @@ class Storage(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def delete_user(self, user: models.User) -> None:
-        pass
-
-    @abc.abstractmethod
     async def get_users(self) -> UsersListQuery:
         pass
 
@@ -40,10 +36,6 @@ class Storage(abc.ABC):
 
     @abc.abstractmethod
     async def update_channel(self, channel: models.Channel) -> None:
-        pass
-
-    @abc.abstractmethod
-    async def delete_channel(self, channel: models.Channel) -> None:
         pass
 
     @abc.abstractmethod

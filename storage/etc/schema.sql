@@ -9,7 +9,8 @@ CREATE TABLE "channels" (
   "id" bigserial PRIMARY KEY,
   "creator_id" bigint,
   "name" varchar(100),
-  "photo" varchar(250)
+  "photo" varchar(250),
+  "deleted" boolean
 );
 CREATE TABLE "channel_relations" (
   "user_id" bigint,
@@ -22,12 +23,14 @@ CREATE TABLE "posts" (
   "channel_id" bigint,
   "name" varchar(100),
   "text" varchar(5000),
-  "photos" [] varchar(250)
+  "photo" varchar(250),
+  "deleted" boolean
 );
 CREATE TABLE "replies" (
   "id" bigserial PRIMARY KEY,
   "creator_id" bigint,
   "post_id" bigint,
   "text" varchar(5000),
-  "photos" [] varchar(250)
+  "photo" varchar(250),
+  "deleted" boolean
 );

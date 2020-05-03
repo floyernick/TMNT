@@ -117,7 +117,7 @@ class ChannelsListQuery(interface.ChannelsListQuery):
 
     async def fetch(self) -> List[models.Channel]:
 
-        query = ("SELECT id, creator_id, name, photo FROM channels")
+        query = ("SELECT id, creator_id, name, photo, deleted FROM channels")
 
         query = self.__format_query(query)
 
@@ -138,13 +138,14 @@ class ChannelsListQuery(interface.ChannelsListQuery):
             channel.creator_id = result["creator_id"]
             channel.name = result["name"]
             channel.photo = result["photo"]
+            channel.deleted = result["deleted"]
             channels.append(channel)
 
         return channels
 
     async def fetch_one(self) -> models.Channel:
 
-        query = ("SELECT id, creator_id, name, photo FROM channels")
+        query = ("SELECT id, creator_id, name, photo, deleted FROM channels")
 
         query = self.__format_query(query)
 
@@ -164,18 +165,20 @@ class ChannelsListQuery(interface.ChannelsListQuery):
         channel.creator_id = result["creator_id"]
         channel.name = result["name"]
         channel.photo = result["photo"]
+        channel.deleted = result["deleted"]
 
         return channel
 
 
 async def store_channel(self: Storage, channel: models.Channel) -> int:
 
-    query = ("INSERT INTO channels(creator_id, name, photo) "
-             "VALUES ($1, $2, $3) RETURNING id")
+    query = ("INSERT INTO channels(creator_id, name, photo, deleted) "
+             "VALUES ($1, $2, $3, $4) RETURNING id")
 
     try:
         result = await self.performer().fetchrow(query, channel.creator_id,
-                                                 channel.name, channel.photo)
+                                                 channel.name, channel.photo,
+                                                 channel.deleted)
     except Exception as e:
         await logger.warning(e)
         raise errors.StorageException
@@ -188,23 +191,13 @@ async def store_channel(self: Storage, channel: models.Channel) -> int:
 async def update_channel(self: Storage, channel: models.Channel) -> None:
 
     query = (
-        "UPDATE channels SET creator_id = $2, name = $3, photo = $4 WHERE id = $1"
+        "UPDATE channels SET creator_id = $2, name = $3, photo = $4, deleted = $5 WHERE id = $1"
     )
 
     try:
         await self.performer().fetchrow(query, channel.id, channel.creator_id,
-                                        channel.name, channel.photo)
-    except Exception as e:
-        await logger.warning(e)
-        raise errors.StorageException
-
-
-async def delete_channel(self: Storage, channel: models.Channel) -> None:
-
-    query = "DELETE FROM channels WHERE id = $1"
-
-    try:
-        await self.performer().execute(query, channel.id)
+                                        channel.name, channel.photo,
+                                        channel.deleted)
     except Exception as e:
         await logger.warning(e)
         raise errors.StorageException

@@ -139,6 +139,17 @@ schemas = {
             "maxlength": 100
         },
     },
+    "channels_delete": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "id": {
+            "required": True,
+            "type": "integer",
+            "min": 1
+        }
+    },
     "channels_get": {
         "token": {
             "required": True,

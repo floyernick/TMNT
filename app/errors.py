@@ -30,8 +30,8 @@ class ActionNotAllowed(DomainException):
     description = "action not allowed"
 
 
-class UsernameUsed(DomainException):
-    description = "username used"
+class UsernameTaken(DomainException):
+    description = "username taken"
 
 
 class InvalidCredentials(DomainException):

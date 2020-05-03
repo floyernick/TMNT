@@ -10,6 +10,7 @@ class Controller:
     users_signup = users.users_signup
     users_signin = users.users_signin
     users_get = users.users_get
+    users_update = users.users_update
 
 
 async def init(storage_: storage.Storage) -> Controller:

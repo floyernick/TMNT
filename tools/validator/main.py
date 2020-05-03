@@ -45,7 +45,36 @@ schemas = {
             "required": True,
             "type": "string"
         }
-    }
+    },
+    "users_update": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "name": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+        "username": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+        "password": {
+            "required": False,
+            "type": "string",
+            "regex": "[^\s]{8,32}$"
+        },
+        "photo": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+    },
 }
 
 

@@ -195,16 +195,12 @@ async def update_user(self: Storage, user: models.User) -> None:
     )
 
     try:
-        result = await self.performer().fetchrow(query, user.id, user.name,
-                                                 user.username, user.photo,
-                                                 user.password)
+        await self.performer().fetchrow(query, user.id, user.name,
+                                        user.username, user.photo,
+                                        user.password)
     except Exception as e:
         await logger.warning(e)
         raise errors.StorageException
-
-    id_ = result["id"]
-
-    return id_
 
 
 async def delete_user(self: Storage, user: models.User) -> None:

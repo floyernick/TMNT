@@ -144,7 +144,7 @@ class ChannelsListQuery(interface.ChannelsListQuery):
 
     async def fetch_one(self) -> models.Channel:
 
-        query = ("SELECT id, name, channelname, photo, password FROM channels")
+        query = ("SELECT id, creator_id, name, photo FROM channels")
 
         query = self.__format_query(query)
 

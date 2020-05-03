@@ -13,6 +13,7 @@ class Controller:
     users_update = users.users_update
 
     channels_create = channels.channels_create
+    channels_update = channels.channels_update
 
 
 async def init(storage_: storage.Storage) -> Controller:

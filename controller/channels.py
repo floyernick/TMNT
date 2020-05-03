@@ -49,3 +49,54 @@ async def channels_create(self: Controller,
     result = {"id": channel.id}
 
     return result
+
+
+async def channels_update(self: Controller,
+                          params: Dict[str, Any]) -> Dict[str, Any]:
+
+    try:
+        await validator.validate("channels_update", params)
+    except validator.ValidationError:
+        raise errors.RequestValidationFailed
+
+    try:
+        token = await tokens.parse(params["token"])
+    except tokens.ParseError:
+        raise errors.InvalidToken
+
+    cu_query = await self.storage.get_users()
+    cu_query.add(cu_query.equals("id", token["id"]))
+
+    try:
+        current_user = await cu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    chu_query = await self.storage.get_channels()
+    chu_query.add(chu_query.equals("id", params["id"]))
+
+    try:
+        channel = await chu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    if not channel.exists():
+        raise errors.ChannelNotFound
+
+    if not channel.created_by(current_user):
+        raise errors.ActionNotAllowed
+
+    if "name" in params:
+        channel.name = params["name"]
+
+    if "photo" in params:
+        channel.photo = params["photo"]
+
+    try:
+        await self.storage.update_channel(channel)
+    except errors.StorageException:
+        raise errors.InternalError
+
+    result = {}
+
+    return result

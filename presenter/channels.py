@@ -13,3 +13,9 @@ async def channels_create(self: Presenter, request: Any) -> Dict[str, Any]:
     request_body = await utils.parse_request_body(request)
     response_body = await self.controller.channels_create(request_body)
     return response_body
+
+
+async def channels_update(self: Presenter, request: Any) -> Dict[str, Any]:
+    request_body = await utils.parse_request_body(request)
+    response_body = await self.controller.channels_update(request_body)
+    return response_body

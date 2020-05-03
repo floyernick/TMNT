@@ -38,5 +38,9 @@ class InvalidCredentials(DomainException):
     description = "invalid credentials"
 
 
+class ChannelNotFound(DomainException):
+    description = "channel not found"
+
+
 class StorageException(Exception):
     description = ""

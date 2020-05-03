@@ -7,6 +7,8 @@ import app.errors as errors
 import tools.logger as logger
 from . import interface
 
+from . import user
+
 
 async def transaction(self: Storage) -> Storage:
     try:
@@ -61,6 +63,11 @@ class Storage(interface.Storage):
     transaction = transaction
     commit = commit
     rollback = rollback
+
+    store_user = user.store_user
+    update_user = user.update_user
+    delete_user = user.delete_user
+    get_users = user.get_users
 
 
 async def init(config: Dict[str, Any]) -> Storage:

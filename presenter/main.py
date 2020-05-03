@@ -19,6 +19,7 @@ class Presenter:
 
     channels_create = channels.channels_create
     channels_update = channels.channels_update
+    channels_get = channels.channels_get
 
 
 async def init(config: Dict[str, Any], controller_: controller.Controller):
@@ -34,6 +35,7 @@ async def init(config: Dict[str, Any], controller_: controller.Controller):
 
     app.router.add_route("POST", "/channels.create", presenter.channels_create)
     app.router.add_route("POST", "/channels.update", presenter.channels_update)
+    app.router.add_route("POST", "/channels.get", presenter.channels_get)
 
     runner = web.AppRunner(app, access_log=False)
     await runner.setup()

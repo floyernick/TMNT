@@ -100,3 +100,58 @@ async def channels_update(self: Controller,
     result = {}
 
     return result
+
+
+async def channels_get(self: Controller, params: Dict[str,
+                                                      Any]) -> Dict[str, Any]:
+
+    try:
+        await validator.validate("channels_get", params)
+    except validator.ValidationError:
+        raise errors.RequestValidationFailed
+
+    try:
+        token = await tokens.parse(params["token"])
+    except tokens.ParseError:
+        raise errors.InvalidToken
+
+    cu_query = await self.storage.get_users()
+    cu_query.add(cu_query.equals("id", token["id"]))
+
+    try:
+        current_user = await cu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    chu_query = await self.storage.get_channels()
+    chu_query.add(chu_query.equals("id", params["id"]))
+
+    try:
+        channel = await chu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    if not channel.exists():
+        raise errors.ChannelNotFound
+
+    cr_query = await self.storage.get_users()
+    cr_query.add(cr_query.equals("id", channel.creator_id))
+
+    try:
+        channel.creator = await cu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    result = {
+        "id": channel.id,
+        "name": channel.name,
+        "photo": channel.photo,
+        "creator": {
+            "id": channel.creator.id,
+            "name": channel.creator.name,
+            "username": channel.creator.username,
+            "photo": channel.creator.photo
+        }
+    }
+
+    return result

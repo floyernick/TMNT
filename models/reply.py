@@ -16,11 +16,11 @@ class Reply:
                  post_id: int = 0,
                  text: str = "",
                  photo: str = ""):
-        self.id = id_
-        self.creator_id = creator_id
-        self.post_id = post_id
-        self.text = text
-        self.photo = photo
+        self.id: int = id_
+        self.creator_id: int = creator_id
+        self.post_id: int = post_id
+        self.text: str = text
+        self.photo: str = photo
 
     def exists(self) -> bool:
         return self.id != 0

@@ -13,11 +13,11 @@ class User:
                  username: str = "",
                  photo: str = "",
                  password: str = ""):
-        self.id = id_
-        self.name = name
-        self.username = username
-        self.photo = photo
-        self.password = password
+        self.id: int = id_
+        self.name: str = name
+        self.username: str = username
+        self.photo: str = photo
+        self.password: str = password
 
     def exists(self) -> bool:
         return self.id != 0

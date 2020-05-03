@@ -17,12 +17,12 @@ class Post:
                  name: str = "",
                  text: str = "",
                  photo: str = ""):
-        self.id = id_
-        self.creator_id = creator_id
-        self.channel_id = channel_id
-        self.name = name
-        self.text = text
-        self.photo = photo
+        self.id: int = id_
+        self.creator_id: int = creator_id
+        self.channel_id: int = channel_id
+        self.name: str = name
+        self.text: str = text
+        self.photo: str = photo
 
     def exists(self) -> bool:
         return self.id != 0

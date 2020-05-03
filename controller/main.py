@@ -14,6 +14,7 @@ class Controller:
 
     channels_create = channels.channels_create
     channels_update = channels.channels_update
+    channels_get = channels.channels_get
 
 
 async def init(storage_: storage.Storage) -> Controller:

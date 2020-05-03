@@ -15,10 +15,10 @@ class ChannelRelation:
                  user_id: int = 0,
                  channel_id: int = 0,
                  role: int = 0):
-        self.id = id_
-        self.user_id = user_id
-        self.channel_id = channel_id
-        self.role = role
+        self.id: int = id_
+        self.user_id: int = user_id
+        self.channel_id: int = channel_id
+        self.role: int = role
 
     def exists(self) -> bool:
         return self.id != 0

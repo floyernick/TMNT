@@ -116,6 +116,40 @@ schemas = {
             "maxlength": 100
         },
     },
+    "channels_update": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "id": {
+            "required": True,
+            "type": "integer",
+            "min": 1
+        },
+        "name": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+        "photo": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
+    },
+    "channels_get": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "id": {
+            "required": True,
+            "type": "integer",
+            "min": 1
+        }
+    }
 }
 
 

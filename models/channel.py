@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Optional
 
 import app
 import models
@@ -15,10 +16,11 @@ class Channel:
                  creator_id: int = 0,
                  name: str = "",
                  photo: str = ""):
-        self.id = id_
-        self.creator_id = creator_id
-        self.name = name
-        self.photo = photo
+        self.id: int = id_
+        self.creator_id: int = creator_id
+        self.name: str = name
+        self.photo: str = photo
+        self.creator: Optional[User] = None
 
     def exists(self) -> bool:
         return self.id != 0

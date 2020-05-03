@@ -18,9 +18,5 @@ class InternalError(DomainException):
     description = "internal error"
 
 
-class NoteNotFound(DomainException):
-    description = "note not found"
-
-
 class StorageException(Exception):
     description = ""

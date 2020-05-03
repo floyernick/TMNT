@@ -1,6 +1,10 @@
-aiohttp==3.4.4
+aiohttp==3.6.2
 asyncpg==0.18.2
 Cerberus==1.2
-mypy==0.641
-yapf==0.24.0
-uvloop==0.11.3
+mypy==0.770
+yapf==0.29.0
+pyyaml==5.3.1
+uvloop==0.14.0
+sentry-sdk==0.14.3
+PyJWT==1.7.1
+aiohttp_cors==0.7.0

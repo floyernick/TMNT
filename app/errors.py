@@ -18,5 +18,21 @@ class InternalError(DomainException):
     description = "internal error"
 
 
+class RequestValidationFailed(DomainException):
+    description = "request validation failed"
+
+
+class InvalidToken(DomainException):
+    description = "invalid token"
+
+
+class ActionNotAllowed(DomainException):
+    description = "action not allowed"
+
+
+class UsernameUsed(DomainException):
+    description = "username used"
+
+
 class StorageException(Exception):
     description = ""

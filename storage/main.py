@@ -7,7 +7,7 @@ import app.errors as errors
 import tools.logger as logger
 from . import interface
 
-from . import user
+from . import user, channel
 
 
 async def transaction(self: Storage) -> Storage:
@@ -68,6 +68,11 @@ class Storage(interface.Storage):
     update_user = user.update_user
     delete_user = user.delete_user
     get_users = user.get_users
+
+    store_channel = channel.store_channel
+    update_channel = channel.update_channel
+    delete_channel = channel.delete_channel
+    get_channels = channel.get_channels
 
 
 async def init(config: Dict[str, Any]) -> Storage:

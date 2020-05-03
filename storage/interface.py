@@ -34,6 +34,22 @@ class Storage(abc.ABC):
     async def get_users(self) -> UsersListQuery:
         pass
 
+    @abc.abstractmethod
+    async def store_channel(self, channel: models.Channel) -> int:
+        pass
+
+    @abc.abstractmethod
+    async def update_channel(self, channel: models.Channel) -> None:
+        pass
+
+    @abc.abstractmethod
+    async def delete_channel(self, channel: models.Channel) -> None:
+        pass
+
+    @abc.abstractmethod
+    async def get_channels(self) -> ChannelsListQuery:
+        pass
+
 
 class QueryBuilder(abc.ABC):
     @abc.abstractmethod
@@ -156,4 +172,62 @@ class UsersListQuery(abc.ABC):
 
     @abc.abstractmethod
     async def fetch_one(self) -> models.User:
+        pass
+
+
+class ChannelsListQuery(abc.ABC):
+    @abc.abstractmethod
+    def equals(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def not_equals(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def like(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def contains(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def in_(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def not_in_(self, field: str, value: Any) -> str:
+        pass
+
+    @abc.abstractmethod
+    def and_(self, *conditions) -> str:
+        pass
+
+    @abc.abstractmethod
+    def or_(self, *conditions) -> str:
+        pass
+
+    @abc.abstractmethod
+    def add(self, condition: str) -> None:
+        pass
+
+    @abc.abstractmethod
+    def paginate(self, offset: int, limit: int) -> None:
+        pass
+
+    @abc.abstractmethod
+    def order(self, field: str, value: str) -> None:
+        pass
+
+    @abc.abstractmethod
+    async def count(self) -> int:
+        pass
+
+    @abc.abstractmethod
+    async def fetch(self) -> List[models.Channel]:
+        pass
+
+    @abc.abstractmethod
+    async def fetch_one(self) -> models.Channel:
         pass

@@ -16,6 +16,7 @@ class Controller:
     channels_update = channels.channels_update
     channels_delete = channels.channels_delete
     channels_get = channels.channels_get
+    channels_list = channels.channels_list
 
 
 async def init(storage_: storage.Storage) -> Controller:

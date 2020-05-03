@@ -160,6 +160,18 @@ schemas = {
             "type": "integer",
             "min": 1
         }
+    },
+    "channels_list": {
+        "token": {
+            "required": True,
+            "type": "string"
+        },
+        "name": {
+            "required": False,
+            "type": "string",
+            "minlength": 1,
+            "maxlength": 100
+        },
     }
 }
 

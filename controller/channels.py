@@ -202,3 +202,64 @@ async def channels_get(self: Controller, params: Dict[str,
     }
 
     return result
+
+
+async def channels_list(self: Controller, params: Dict[str,
+                                                       Any]) -> Dict[str, Any]:
+
+    try:
+        await validator.validate("channels_list", params)
+    except validator.ValidationError:
+        raise errors.RequestValidationFailed
+
+    try:
+        token = await tokens.parse(params["token"])
+    except tokens.ParseError:
+        raise errors.InvalidToken
+
+    cu_query = await self.storage.get_users()
+    cu_query.add(cu_query.equals("id", token["id"]))
+
+    try:
+        current_user = await cu_query.fetch_one()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    chu_query = await self.storage.get_channels()
+    chu_query.add(chu_query.equals("deleted", False))
+
+    if "name" in params:
+        chu_query.add(chu_query.like("name", params["name"]))
+
+    try:
+        channels = await chu_query.fetch()
+    except errors.StorageException:
+        raise errors.InternalError
+
+    for channel in channels:
+        cr_query = await self.storage.get_users()
+        cr_query.add(cr_query.equals("id", channel.creator_id))
+
+        try:
+            channel.creator = await cu_query.fetch_one()
+        except errors.StorageException:
+            raise errors.InternalError
+
+    result = {"channels": []}
+
+    for channel in channels:
+        result_channel = {
+            "id": channel.id,
+            "name": channel.name,
+            "photo": channel.photo
+        }
+        if channel.creator is not None:
+            result_channel["creator"] = {
+                "id": channel.creator.id,
+                "name": channel.creator.name,
+                "username": channel.creator.username,
+                "photo": channel.creator.photo
+            }
+        result["channels"].append(result_channel)
+
+    return result
